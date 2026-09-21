@@ -1,9 +1,16 @@
-# Stage B - joint adaptation: stage-A modules + LoRA (r=16) on the attention projections and
-# both experts' MLPs. Initialise with --init-from <stage A adapter>.
-model: configs/model/medplib_7b_2e.yaml
+# Stage B - joint adaptation: keeps training the stage-A modules and adds LoRA (r=16) on the
+# attention projections and both experts' MLPs, plus the SAM-Med2D encoder adapters (the encoder
+# runs with gradients). Mask loss weighted up and the IoU head trained.
+# Initialise with --init-from <stage A adapter>.
+model:
+  _base: configs/model/medplib_7b_2e.yaml
+  loss: {ce: 1.0, bce: 2.0, dice: 2.0, iou: 1.0, focal: 0.0}
+  trainable:
+    new_modules: [mm_projector, text_hidden_fcs, visual_model.mask_decoder, deepspeed_moe.gate.wg, .Adapter.]
+    frozen_always: [vision_tower, visual_model.prompt_encoder]
 data: configs/dataset/brisc2025.yaml
 stage: B
-epochs: 6
+epochs: 12
 seed: 42
 lora: {r: 16, alpha: 32, dropout: 0.05}
 optim:
