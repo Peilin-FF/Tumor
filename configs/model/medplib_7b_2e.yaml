@@ -1,0 +1,30 @@
+# Model config: MedPLIB-7b-2e (Huangxs/MedPLIB-7b-2e) + SAM-Med2D-B mask decoder.
+type: medplib_moe
+name: MedPLIB-7b-2e
+checkpoint: ${paths.medplib_ckpt}
+clip_dir: ${paths.clip_dir}
+sam_ckpt: ${paths.sam_ckpt}          # only used to construct SAM; the checkpoint carries its own SAM weights
+precision: bf16
+model_max_length: 1024
+conv_template: llava_v1              # LLaVA-v1 conversation template MedPLIB was fine-tuned with
+sam_img_size: 256                    # SAM-Med2D input resolution
+clip_img_size: 336
+loss:                                # L = ce * CE + bce * BCE + dice * Dice (report section 04)
+  ce: 1.0
+  bce: 2.0
+  dice: 0.5
+  iou: 0.0
+  focal: 0.0
+trainable:
+  # substrings of parameter names trained in both stages ("new modules": router, visual
+  # projector, text projector, mask decoder)
+  new_modules: [mm_projector, text_hidden_fcs, visual_model.mask_decoder, deepspeed_moe.gate.wg]
+  # never trained: CLIP tower, SAM image encoder (+adapters), SAM prompt encoder
+  frozen_always: [vision_tower, visual_model.image_encoder, visual_model.prompt_encoder]
+lora:
+  r: 0                               # 0 = no LoRA (stage A); stage B sets 16
+  alpha: 32
+  dropout: 0.05
+  targets: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  # modules LoRA must never wrap (SAM's transformer also has q_proj/k_proj names)
+  exclude: [visual_model, vision_tower, mm_projector, text_hidden_fcs, region_fea_adapter, lm_head, gate.wg]

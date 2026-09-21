@@ -1,0 +1,12 @@
+# Conventional classification baseline: EfficientNet-B0 on all 5,000 training images.
+model: configs/model/efficientnet_b0.yaml
+data: configs/dataset/brisc2025.yaml
+task: cls
+size: 256
+epochs: 20
+batch: 64
+seed: 42
+optim: {lr: 3.0e-4, weight_decay: 1.0e-4, warmup_ratio: 0.05}
+label_smoothing: 0.1
+workers: 8
+infer_batch: 64

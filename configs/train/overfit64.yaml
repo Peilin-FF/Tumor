@@ -1,0 +1,15 @@
+# Pre-flight check: overfit 64 training images with the stage-B recipe; text and mask
+# losses must both fall. No augmentation.
+model: configs/model/medplib_7b_2e.yaml
+data: configs/dataset/brisc2025.yaml
+stage: B
+epochs: 8
+seed: 42
+lora: {r: 16, alpha: 32, dropout: 0.05}
+optim: {lr_lora: 1.0e-4, lr_new: 2.0e-4, weight_decay: 0.0, betas: [0.9, 0.999], warmup_ratio: 0.05, min_lr_ratio: 0.1, grad_clip: 1.0}
+batch: {micro: 2, grad_accum: 1}
+deepspeed: {zero_stage: 2}
+max_train_samples: 64
+augment: false
+workers: 4
+log_every: 4

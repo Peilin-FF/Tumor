@@ -1,0 +1,12 @@
+# Server-side locations. Relative paths are resolved against the project root
+# (/mnt/data/peilin/cancer on the server, or the rproj job snapshot which symlinks
+# data/ and outputs/ back to the live project). Any key can be overridden with an
+# environment variable MEDPLIB_BT_<KEY_UPPERCASE>, e.g. MEDPLIB_BT_OUTPUTS_ROOT=/tmp/x.
+data_root: data
+brisc_root: data/brisc2025
+manifest: data/manifest.csv
+outputs_root: outputs
+medplib_ckpt: /mnt/data/peilin/HF_MODEL/MedPLIB-7b-2e
+clip_dir: /mnt/data/peilin/HF_MODEL/clip-vit-large-patch14-336
+sam_ckpt: /mnt/data/peilin/HF_MODEL/SAM-Med2D/sam-med2d_b.pth
+medplib_root: third_party/MedPLIB

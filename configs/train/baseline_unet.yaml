@@ -1,0 +1,12 @@
+# Conventional segmentation baseline: U-Net (ResNet-34) on the 3,933 tumour training images.
+model: configs/model/unet_resnet34.yaml
+data: configs/dataset/brisc2025.yaml
+task: seg
+size: 512
+epochs: 40
+batch: 16
+seed: 42
+optim: {lr: 3.0e-4, weight_decay: 1.0e-4, warmup_ratio: 0.03}
+loss: {bce: 1.0, dice: 1.0}
+workers: 8
+infer_batch: 16

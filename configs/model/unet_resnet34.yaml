@@ -1,0 +1,6 @@
+# Baseline: U-Net with an ImageNet-pretrained ResNet-34 encoder (segmentation_models_pytorch, timm encoder).
+type: smp_unet
+name: U-Net ResNet34
+encoder: tu-resnet34
+encoder_weights: imagenet
+decoder_attention: null

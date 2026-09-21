@@ -1,0 +1,5 @@
+# Prompted-SAM upper bound: no training, boxes come from the expert masks.
+model: configs/model/sam_med2d_box.yaml
+data: configs/dataset/brisc2025.yaml
+task: seg
+workers: 4

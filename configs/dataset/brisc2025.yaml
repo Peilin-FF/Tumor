@@ -1,0 +1,29 @@
+# Dataset: BRISC 2025 (Kaggle briscdataset/brisc2025). Official split: 5000 train / 1000 test.
+type: brisc2025
+name: BRISC 2025
+root: ${paths.brisc_root}
+manifest: ${paths.manifest}
+mask_bin_threshold: 128              # masks are 0/255 PNGs with soft edges
+# class order fixes class_idx and the candidate order of the log-likelihood classifier
+classes:
+  - {key: glioma,       answer: "glioma",          code: gl, folder: glioma}
+  - {key: meningioma,   answer: "meningioma",      code: me, folder: meningioma}
+  - {key: pituitary,    answer: "pituitary tumor", code: pi, folder: pituitary}
+  - {key: non_tumorous, answer: "non-tumorous",    code: "no", folder: no_tumor}
+planes: {ax: axial, co: coronal, sa: sagittal}
+seg_token: "<SEG>"
+prompts:
+  joint: "Classify this contrast-enhanced T1 brain MRI as glioma, meningioma, pituitary tumor, or non-tumorous, and segment the tumor region."
+  cls:   "Classify this contrast-enhanced T1 brain MRI as glioma, meningioma, pituitary tumor, or non-tumorous."
+  seg:   "Segment the tumor region in this contrast-enhanced T1 brain MRI."
+# training sample mix: joint 50 %, classification-only 25 %, segmentation-only 25 %
+task_mix: {joint: 0.5, cls: 0.25, seg: 0.25}
+augmentation:                        # training split only; geometry shared by image and mask
+  enabled: true
+  hflip_p: 0.5
+  rotate_deg: 10
+  scale: [0.90, 1.10]
+  shift_frac: 0.05
+  brightness_contrast: 0.10
+  noise_p: 0.2
+  noise_sigma: 4.0

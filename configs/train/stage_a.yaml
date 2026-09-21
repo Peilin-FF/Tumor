@@ -1,0 +1,20 @@
+# Stage A - task alignment: train router / visual projector / text projector / mask decoder
+# for one epoch; vision encoder and language experts frozen.
+model: configs/model/medplib_7b_2e.yaml
+data: configs/dataset/brisc2025.yaml
+stage: A
+epochs: 1
+seed: 42
+lora: {r: 0}
+optim:
+  lr_lora: 2.0e-5
+  lr_new: 1.0e-4
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  warmup_ratio: 0.03
+  min_lr_ratio: 0.0
+  grad_clip: 1.0
+batch: {micro: 2, grad_accum: 4}     # effective = micro * grad_accum * n_gpus (2 x 4 x 8 = 64)
+deepspeed: {zero_stage: 2}
+workers: 4
+log_every: 5

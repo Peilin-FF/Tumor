@@ -1,0 +1,20 @@
+# Stage B - joint adaptation: stage-A modules + LoRA (r=16) on the attention projections and
+# both experts' MLPs. Initialise with --init-from <stage A adapter>.
+model: configs/model/medplib_7b_2e.yaml
+data: configs/dataset/brisc2025.yaml
+stage: B
+epochs: 6
+seed: 42
+lora: {r: 16, alpha: 32, dropout: 0.05}
+optim:
+  lr_lora: 2.0e-5
+  lr_new: 1.0e-4
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  warmup_ratio: 0.03
+  min_lr_ratio: 0.0
+  grad_clip: 1.0
+batch: {micro: 2, grad_accum: 4}
+deepspeed: {zero_stage: 2}
+workers: 4
+log_every: 5

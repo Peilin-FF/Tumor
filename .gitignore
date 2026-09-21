@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+.DS_Store
+
+# local editor / assistant settings
+.claude/
+.vscode/
+
+# data, weights and experiment outputs live on the GPU server, not in git
+data/
+outputs/
+logs/
+jobs/
+artifacts/
+checkpoints/
+wandb/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.parquet

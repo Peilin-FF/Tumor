@@ -1,0 +1,14 @@
+# Inference and evaluation settings.
+model: configs/model/medplib_7b_2e.yaml
+data: configs/dataset/brisc2025.yaml
+batch_size: 4                        # images per forward (x 4 candidate answers)
+workers: 4
+prompt: joint                        # key into data.prompts
+with_seg: true                       # answers carry <SEG>; the mask branch always runs (no hard gating)
+seg_threshold: 0.5                   # probability threshold for the binary mask
+seg_only: false                      # segmentation-only control: prompt "seg", single answer "<SEG>"
+min_component_ratio: 0.0             # drop connected components smaller than this fraction of the image (0 = off)
+evaluation:
+  bootstrap: 1000                    # bootstrap resamples for 95 % confidence intervals
+  seed: 42
+  lesion_size_bins: [0.0, 0.005, 0.015, 1.0]   # gt area ratio: small / medium / large

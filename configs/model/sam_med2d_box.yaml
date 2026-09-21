@@ -1,0 +1,7 @@
+# Baseline: SAM-Med2D ViT-B with a box prompt derived from the expert mask (oracle-prompt upper bound).
+type: sam_med2d_prompt
+name: SAM-Med2D-B, oracle box
+checkpoint: ${paths.sam_ckpt}
+image_size: 256
+prompt: box            # box | point (point = mask centroid)
+box_jitter: 0.0        # fraction of box size; > 0 simulates imperfect boxes

@@ -1,0 +1,33 @@
+# Pinned environment for the `medplib` conda env (python 3.10). These are the versions
+# MedPLIB (ShawnHuang497/MedPLIB, commit 5ab54bc) was written against; newer
+# transformers/deepspeed break its patched Llama-MoE forward.
+numpy==1.26.4
+torch==2.1.2
+torchvision==0.16.2
+transformers==4.31.0
+tokenizers==0.13.3
+sentencepiece==0.1.99
+protobuf==4.25.3
+accelerate==0.26.1
+peft==0.10.0
+deepspeed==0.13.1
+huggingface-hub==0.21.4
+safetensors==0.4.2
+einops==0.6.1
+einops-exts==0.0.4
+pillow==10.2.0
+opencv-python-headless==4.9.0.80
+pycocotools==2.0.7
+scikit-image==0.22.0
+scikit-learn==1.2.2
+scipy==1.12.0
+pandas==2.2.1
+pyarrow==15.0.2
+imagehash==4.3.1
+matplotlib==3.8.3
+tensorboard==2.16.2
+tqdm==4.66.2
+shortuuid==1.0.13
+pyyaml==6.0.1
+ninja==1.11.1.1
+gradio==4.44.1
