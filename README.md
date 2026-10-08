@@ -4,6 +4,9 @@
 
 **GP8001 Group Project · Group 3 · Nanyang Technological University**
 
+[![Project Page](https://img.shields.io/badge/Project-Page-1f6feb)](https://huggingface.co/spaces/Sssunset/MedPLIB-BRISC)
+[![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-ffcc4d)](https://huggingface.co/Sssunset/MedPLIB-BRISC)
+
 ![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.1-EE4C2C?logo=pytorch&logoColor=white)
 ![Base model](https://img.shields.io/badge/Base%20model-MedPLIB--7b--2e-6f42c1)
@@ -120,6 +123,16 @@ scripts/download_data.sh                   # BRISC 2025 from Kaggle -> data/bris
 scripts/download_models.sh                 # MedPLIB-7b-2e, CLIP-L/336, SAM-Med2D-B
 python scripts/make_safetensors_index.py   # index for the safetensors shards
 python -m medplib_bt.datasets.manifest     # data/manifest.csv
+```
+
+**Use our trained weights**
+
+The trained weights are on [Hugging Face](https://huggingface.co/Sssunset/MedPLIB-BRISC). After the setup above, they can be used directly without training:
+
+```bash
+huggingface-cli download Sssunset/MedPLIB-BRISC --local-dir checkpoints/medplib-brisc
+scripts/run_infer.sh 0,1,2,3 outputs/preds/medplib-brisc --adapter checkpoints/medplib-brisc   # test set + metrics
+python -m medplib_bt.demo_app --adapter checkpoints/medplib-brisc --port 7860                  # interactive demo
 ```
 
 **Train and evaluate**
