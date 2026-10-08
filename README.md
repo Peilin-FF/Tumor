@@ -7,11 +7,8 @@
 [![Project Page](https://img.shields.io/badge/Project-Page-1f6feb)](https://huggingface.co/spaces/Sssunset/MedPLIB-BRISC)
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-ffcc4d)](https://huggingface.co/Sssunset/MedPLIB-BRISC)
 
-![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.1-EE4C2C?logo=pytorch&logoColor=white)
 ![Base model](https://img.shields.io/badge/Base%20model-MedPLIB--7b--2e-6f42c1)
 ![Dataset](https://img.shields.io/badge/Dataset-BRISC%202025-2ea44f)
-![Use](https://img.shields.io/badge/Use-research%20only-lightgrey)
 
 <img src="assets/fig_architecture.png" width="92%" alt="One forward pass of the unified model">
 
